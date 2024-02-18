@@ -7,12 +7,15 @@
   "scripts": {
     "start": "node ."
   },
-  "main": "dist/index.js",
-  "bin": "dist/index.js",
+  "main": "src/index.js",
+  "bin": "src/index.js",
   "author": "Harsh Keshri",
   "license": "MIT",
   "private": false,
+  "repository": "https://github.com/airbornharsh/h-serverless",
   "dependencies": {
-    "inquirer": "^9.2.14"
+    "chalk-animation": "^2.0.3",
+    "commander": "^12.0.0",
+    "harsh-aws-sdk": "^1.5.0"
   }
 }
