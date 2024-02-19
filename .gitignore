@@ -4,4 +4,4 @@ dist
 
 project
 
-.env
+.env.local
