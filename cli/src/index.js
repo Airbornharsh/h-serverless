@@ -108,7 +108,7 @@ const deploy = async () => {
 
 const main = async () => {
   const val = program
-    .version("1.0.0")
+    .version("1.3.0")
     .description("CLI for asking about a feature name and name")
     .option("-d, --deploy <deploy>", "Deploy the project")
     .option("-f, --type <type>", "Specify the feature name")
