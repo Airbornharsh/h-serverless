@@ -8,7 +8,7 @@ export const copyCode = async (projectId: string) => {
   const localFolderPath = `temp/${projectId}`
   const remoteFolderPath = `projects/${projectId}/`
   try {
-    if (!fs.existsSync('/temp')) fs.mkdirSync('/temp')
+    if (!fs.existsSync('temp')) fs.mkdirSync('temp')
     const [HJson] = await storageBucket
       .file(`${remoteFolderPath}h.json`)
       .download()
