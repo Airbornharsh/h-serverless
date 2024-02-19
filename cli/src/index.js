@@ -1,46 +1,31 @@
 #!/usr/bin/env node
 import { program } from "commander";
 import chalkAnimation from "chalk-animation";
-import fs from "fs";
+import fs from "fs-extra";
+// import fs from "fs";
 import * as path from "path";
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 export const sleep = (ms = 2000) => new Promise((r) => setTimeout(r, ms));
 
-const getAllFiles = async (bucketId, projectName) => {
+const getAllFiles = async (type, projectName) => {
   try {
-    const data = await fetch(
-      `https://s3.harshkeshri.com/api/get-files/${bucketId}`
-    );
-    const parsedData = await data.json();
-    await Promise.all(
-      parsedData.files.map(async (file) => {
-        let url = "";
-        file.url
-          .split("node/")[1]
-          .split("/")
-          .forEach(async (part) => {
-            url += part + "/";
-            const dir = path.join(process.cwd(), projectName, url);
-            if (!part.includes(".")) {
-              if (!fs.existsSync(dir)) {
-                fs.mkdirSync(dir, { recursive: true });
-              }
-              if (fs.statSync(dir).isDirectory()) {
-              }
-            } else {
-              const res = await fetch(file.url);
-              const parsedData = await res.arrayBuffer();
-              fs.writeFileSync(
-                path.join(process.cwd(), projectName, url.slice(0, -1)),
-                Buffer.from(parsedData)
-              );
-            }
-          });
-        return "";
-      })
-    );
+    let sourceFolder;
+    if (type === "nodejs") {
+      sourceFolder = path.join(__dirname, "../codes/node");
+      if (!fs.existsSync(sourceFolder)) {
+        console.error("Source folder does not exist.");
+        return;
+      }
+    } else {
+      return;
+    }
+    const destinationFolder = process.cwd() + "/" + projectName;
+    if (!fs.existsSync(destinationFolder)) {
+      fs.mkdirSync(destinationFolder);
+    }
+    fs.copySync(sourceFolder, destinationFolder);
   } catch (e) {
     throw new Error(e);
   }
@@ -51,7 +36,7 @@ const copyCode = async (type, projectName) => {
     if (!fs.existsSync(path.join(process.cwd(), projectName))) {
       fs.mkdirSync(path.join(process.cwd(), projectName));
     }
-    await getAllFiles("82cb49a9-0c33-4434-a2d7-8eb0e20990ea", projectName);
+    await getAllFiles(type, projectName);
   } catch (err) {
     console.error(err);
   }
@@ -60,6 +45,7 @@ const copyCode = async (type, projectName) => {
 const start = async (type, projectName) => {
   // const ani = chalkAnimation.rainbow("Starting...");
   await copyCode(type, projectName);
+  console.log(`cd ${projectName} && npm install`);
   // await sleep();
   // ani.stop();
 };
