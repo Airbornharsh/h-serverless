@@ -16,7 +16,9 @@
   "dependencies": {
     "chalk-animation": "^2.0.3",
     "commander": "^12.0.0",
+    "firebase": "^10.8.0",
     "fs-extra": "^11.2.0",
-    "harsh-aws-sdk": "^1.5.0"
+    "harsh-aws-sdk": "^1.5.0",
+    "uuid": "^9.0.1"
   }
 }

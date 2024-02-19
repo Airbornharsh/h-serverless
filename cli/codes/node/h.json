@@ -1,0 +1,17 @@
+{
+  "name": "project_name",
+  "id": "project_id",
+  "version": "0.0.1",
+  "description": "project_description",
+  "language": "nodejs",
+  "functions": [
+    {
+      "name": "index.js",
+      "path": "src/"
+    },
+    {
+      "name": "check.js",
+      "path": "src/check"
+    }
+  ]
+}
