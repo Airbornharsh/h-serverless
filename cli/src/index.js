@@ -104,20 +104,22 @@ const deploy = async () => {
   const { name, id } = JSON.parse(hjson);
   console.log(`Deploying project ${name} with id ${id}...`);
 
-  const HJsonRef = ref(storage, `projects/${id}/h.json`);
-  const hjsonURL = await getDownloadURL(HJsonRef);
-  const response = await fetch(hjsonURL);
-  const hjsonContent = await response.text();
-  const parsedHjson = JSON.parse(hjsonContent);
-  parsedHjson.latestVersion += 1;
-  await uploadBytes(
-    HJsonRef,
-    Buffer.from(JSON.stringify(parsedHjson, null, 2))
-  );
-  fs.writeFileSync(
-    path.join(process.cwd(), "h.json"),
-    JSON.stringify(parsedHjson, null, 2)
-  );
+  try {
+    const HJsonRef = ref(storage, `projects/${id}/h.json`);
+    const hjsonURL = await getDownloadURL(HJsonRef);
+    const response = await fetch(hjsonURL);
+    const hjsonContent = await response.text();
+    const parsedHjson = JSON.parse(hjsonContent);
+    parsedHjson.latestVersion += 1;
+    await uploadBytes(
+      HJsonRef,
+      Buffer.from(JSON.stringify(parsedHjson, null, 2))
+    );
+    fs.writeFileSync(
+      path.join(process.cwd(), "h.json"),
+      JSON.stringify(parsedHjson, null, 2)
+    );
+  } catch (e) {}
 
   await uploadFolder(process.cwd(), `projects/${id}`, id);
 };
