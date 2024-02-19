@@ -128,7 +128,7 @@ const deploy = async () => {
     console.log(`Function Name: ${funcName}`);
     console.log(`   METHOD: ${func.method}`);
     console.log(
-      `   URL: https://h-serverless.harshkeshri.com/${id}/${func.route}`
+      `   URL: https://h-serverless.harshkeshri.com/api/${id}/${func.route}`
     );
   });
 };
