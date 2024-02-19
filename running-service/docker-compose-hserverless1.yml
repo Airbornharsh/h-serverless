@@ -1,0 +1,16 @@
+# docker-compose-hserverless.yml
+
+version: '3.7'
+
+services:
+  h-serverless-running:
+    image: airbornarsh/h-serverless-running-service:latest
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+    environment:
+      - FIREBASE_PROJECT_ID=
+      - FIREBASE_PRIVATE_KEY=
+      - FIREBASE_CLIENT_EMAIL=
+      - FIREBASE_STORAGE_BUCKET=

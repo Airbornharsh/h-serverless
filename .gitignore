@@ -7,3 +7,5 @@ project
 .env
 
 temp
+
+docker-compose-hserverless.yml
