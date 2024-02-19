@@ -8,11 +8,11 @@ export const copyCode = async (projectId: string) => {
   const localFolderPath = `temp/${projectId}`
   const remoteFolderPath = `projects/${projectId}/`
   try {
+    if (!fs.existsSync('/temp')) fs.mkdirSync('/temp')
     const [HJson] = await storageBucket
       .file(`${remoteFolderPath}h.json`)
       .download()
     const hJson = Buffer.from(HJson).toString('utf-8')
-
     const projectExist = fs.existsSync(localFolderPath)
 
     if (projectExist) {
@@ -61,6 +61,6 @@ export const copyCode = async (projectId: string) => {
     console.log(execRes)
     console.log('Folder downloaded successfully.')
   } catch (e: any) {
-    console.error(e)
+    // console.error(e)
   }
 }
