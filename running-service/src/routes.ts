@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import {
+  APIHandler,
   ApiDeleteHandler,
   ApiGetHandler,
   ApiPatchHandler,

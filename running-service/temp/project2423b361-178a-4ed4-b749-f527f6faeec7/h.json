@@ -2,17 +2,21 @@
   "name": "project",
   "id": "project2423b361-178a-4ed4-b749-f527f6faeec7",
   "version": "0.0.1",
-  "latestVersion": 2,
+  "latestVersion": 27,
   "description": "project_description",
   "language": "nodejs",
-  "functions": [
-    {
-      "name": "index.js",
-      "path": "src/"
+  "functions": {
+    "main": {
+      "path": "src/index.js",
+      "route": "",
+      "method": "GET",
+      "handler": "main"
     },
-    {
-      "name": "check.js",
-      "path": "src/check"
+    "checker": {
+      "path": "src/server/check.js",
+      "route": "server",
+      "method": "POST",
+      "handler": "check"
     }
-  ]
+  }
 }

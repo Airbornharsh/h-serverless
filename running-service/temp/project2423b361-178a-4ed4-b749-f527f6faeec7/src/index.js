@@ -1,5 +1,13 @@
 const main = async () => {
-  console.log("Hello World");
+  return {
+    statusCode: 200,
+    body: { message: "Hello World!" },
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "*",
+      "Access-Control-Allow-Credentials": true,
+    },
+  };
 };
 
-export default main;
+module.exports = { main };
