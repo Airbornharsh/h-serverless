@@ -1,6 +1,6 @@
 {
   "name": "h-serverless",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "homepage": "https://harshkeshri.com",
   "description": "this is a package which helps to add serverless ",
   "type": "module",

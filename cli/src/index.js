@@ -42,8 +42,6 @@ async function uploadFolder(localFolderPath, remoteFolderPath, id) {
     } else {
       const file = fs.readFileSync(localFilePath);
       await uploadBytes(storageRef, file);
-
-      console.log(`Uploaded ${localFilePath} to ${remoteFilePath}`);
     }
   }
 }
@@ -104,24 +102,35 @@ const deploy = async () => {
   const { name, id } = JSON.parse(hjson);
   console.log(`Deploying project ${name} with id ${id}...`);
 
+  let parsedLocalHJson = JSON.parse(hjson);
   try {
     const HJsonRef = ref(storage, `projects/${id}/h.json`);
     const hjsonURL = await getDownloadURL(HJsonRef);
     const response = await fetch(hjsonURL);
     const hjsonContent = await response.text();
     const parsedHjson = JSON.parse(hjsonContent);
-    parsedHjson.latestVersion += 1;
+    parsedLocalHJson.latestVersion = parsedHjson.latestVersion + 1;
     await uploadBytes(
       HJsonRef,
-      Buffer.from(JSON.stringify(parsedHjson, null, 2))
+      Buffer.from(JSON.stringify(parsedLocalHJson, null, 2))
     );
     fs.writeFileSync(
       path.join(process.cwd(), "h.json"),
-      JSON.stringify(parsedHjson, null, 2)
+      JSON.stringify(parsedLocalHJson, null, 2)
     );
   } catch (e) {}
 
   await uploadFolder(process.cwd(), `projects/${id}`, id);
+  console.log("Project deployed successfully");
+  console.log(`Project URL: https://h-serverless.harshkeshri.com/${id}`);
+  Object.keys(parsedLocalHJson.functions).forEach((funcName) => {
+    const func = parsedLocalHJson.functions[funcName];
+    console.log(`Function Name: ${funcName}`);
+    console.log(`   METHOD: ${func.method}`);
+    console.log(
+      `   URL: https://h-serverless.harshkeshri.com/${id}/${func.route}`
+    );
+  });
 };
 
 const main = async () => {

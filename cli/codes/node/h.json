@@ -5,14 +5,12 @@
   "latestVersion": 0,
   "description": "project_description",
   "language": "nodejs",
-  "functions": [
-    {
-      "name": "index.js",
-      "path": "src/"
-    },
-    {
-      "name": "check.js",
-      "path": "src/check"
+  "functions": {
+    "hello": {
+      "path": "src/index.js",
+      "route": "",
+      "method": "GET",
+      "handler": "hello"
     }
-  ]
+  }
 }
