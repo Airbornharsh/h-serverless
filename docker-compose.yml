@@ -24,4 +24,4 @@ services:
     depends_on:
       - h-serverless-running
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./running-service/nginx.conf:/etc/nginx/nginx.conf:ro
