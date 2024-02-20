@@ -3,5 +3,6 @@ services:
     name: h-serverless-running
     envVars:
       - key: PORT
-        value: '4005'
-    startCommand: 'docker compose up -d'
+        value: "4005"
+    startCommand: "docker compose up -d"
+    runtime: nodejs10.x
