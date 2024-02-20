@@ -1,5 +1,6 @@
 services:
-  - name: h-serverless-running
+  - type: web
+    name: h-serverless-running
     envVars:
       - key: PORT
         value: '4005'
