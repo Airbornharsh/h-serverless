@@ -4,7 +4,7 @@ services:
     envVars:
       - key: PORT
         value: "4005"
-    startCommand: "docker compose up -d" 
+    startCommand: "docker compose up -d"
     instances:
       desiredCount: 3
-    runtime: [your_valid_runtime]
+    runtime: [node]
