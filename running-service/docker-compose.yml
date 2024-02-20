@@ -11,7 +11,7 @@ services:
       - FIREBASE_CLIENT_EMAIL={{ secret.FIREBASE_CLIENT_EMAIL }}
       - FIREBASE_STORAGE_BUCKET={{ secret.FIREBASE_STORAGE_BUCKET }}
     deploy:
-      replicas: 5
+      replicas: 2
       restart_policy:
         condition: any
     expose:
@@ -24,4 +24,4 @@ services:
     depends_on:
       - h-serverless-running
     volumes:
-      - ./running-service/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
