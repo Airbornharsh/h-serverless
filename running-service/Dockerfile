@@ -30,4 +30,6 @@ WORKDIR /app
 
 COPY docker-compose.yml .
 
+EXPOSE 4005
+
 CMD ["docker-compose", "up", "-d"]
