@@ -1,0 +1,27 @@
+# docker-compose-hserverless.yml
+
+version: '3.7'
+
+services:
+  h-serverless-running:
+    image: airbornarsh/h-serverless-running-service:latest
+    environment:
+      - FIREBASE_PROJECT_ID={{ secret.FIREBASE_PROJECT_ID }}
+      - FIREBASE_PRIVATE_KEY={{ secret.FIREBASE_PRIVATE_KEY }}
+      - FIREBASE_CLIENT_EMAIL={{ secret.FIREBASE_CLIENT_EMAIL }}
+      - FIREBASE_STORAGE_BUCKET={{ secret.FIREBASE_STORAGE_BUCKET }}
+    deploy:
+      replicas: 5
+      restart_policy:
+        condition: any
+    expose:
+      - 4005
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - '4005:4005'
+    depends_on:
+      - h-serverless-running
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
