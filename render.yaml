@@ -4,5 +4,4 @@ services:
     envVars:
       - key: PORT
         value: "4005"
-    startCommand: "docker compose up -d"
-    runtime: docker
+    startCommand: "docker compose up -d" 
