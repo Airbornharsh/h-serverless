@@ -13,10 +13,6 @@ async function runCommand(command) {
 
 async function installDocker() {
   try {
-    await runCommand('apt-get update');
-    await runCommand('apt-get install sudo');
-    await runCommand('sudo apt update');
-    await runCommand('sudo apt install curl');
     await runCommand('curl -fsSL https://get.docker.com -o get-docker.sh');
     await runCommand('sh get-docker.sh');
     await runCommand('rm get-docker.sh');
