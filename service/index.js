@@ -11,7 +11,7 @@ async function runCommand(command) {
       });
     });
 
-    console.log(stdout);
+    console.log(command, " -> ", stdout);
     console.error(stderr);
   } catch (error) {
     console.error(`Error: ${error}`);
