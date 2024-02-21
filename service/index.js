@@ -20,6 +20,7 @@ async function runCommand(command) {
 
 async function installDocker() {
   try {
+    await runCommand("curl --version");
     await runCommand("curl -fsSL https://get.docker.com -o get-docker.sh");
     await runCommand("sh get-docker.sh");
     await runCommand("rm get-docker.sh");
